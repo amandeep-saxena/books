@@ -16,7 +16,7 @@
     2. /book : this endpoint is user to find allrecord.
     3. /books/:id :  record find by id 
     4. /books/:id :  record find by id and delete record
-    5. 
+    5. /books/:id : updates the  records
 
 
 
