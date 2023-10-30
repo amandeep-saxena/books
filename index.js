@@ -37,21 +37,22 @@ mongoose.connect(process.env.MONGODB, {
 
 
 
-app.post('/books', async (req, res)=> {
-    const title= req.body.title;
+app.post('/books', async (req, res) => {
+    const title = req.body.title;
     const author = req.body.author;
     const summary = req.body.summary
-    const bookExist = await BOOK.findOne({title : title});
+    const bookExist = await BOOK.findOne({ title: title });
+    console.log(bookExist)
 
-    if (bookExist) return res.send('Book already exist');
-    var data = await BOOK.create({title,author,summary});
+    // if (bookExist) return res.send('Book already exist');
+    var data = await BOOK.create({ title, author, summary });
     data.save();
     res.send("Book Uploaded");
 });
 
 
 
-app.get('/bookFind' ,async(req,res) =>{
+app.get('/books', async (req, res) => {
     const bookList = await BOOK.find();
     console.log(bookList);
     res.send(bookList);
@@ -60,37 +61,33 @@ app.get('/bookFind' ,async(req,res) =>{
 
 
 
-app.get('/bookFind/:id', async  (req, res) => {
-    const { id } = req.params;
+app.get('/books/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const book = await BOOK.findOne({ _id: id });
+        res.send(book);
+    } catch (err) {
+        console.log(err)
+        res.send(err)
+    }
 
-    const book = await BOOK.findOne({isbn : id});
-
-    // if(!book) return res.send("Book Not Found");
-    res.send(book);
 });
 
 
 
 
 
-app.delete('/bookDelete/:id', async function (req, res) {
+app.delete('/books/:id', async function (req, res) {
     const { id } = req.params;
-
-    const bookExist = await BOOK.findOne({isbn : id});
-
+    const bookExist = await BOOK.findOne({ _id: id });
     if (!bookExist) return res.send('Book Do Not exist');
-
-   await BOOK.deleteOne({ isbn: id }).then(function(){
-        console.log("Data deleted"); 
+    await BOOK.deleteOne({ _id: id }).then(function () {
+        console.log("Data deleted"); // Success
         res.send("Book Record Deleted Successfully")
-
-    }).catch(function(error){
-        console.log(error); 
+    }).catch(function (error) {
+        console.log(error); // Failure
     });
 });
-
-
-
 
 
 

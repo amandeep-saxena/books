@@ -1,4 +1,11 @@
-  //CURD opretion =>
+// gitHub repo :   "https://github.com/amandeep-saxena/books.git"
+
+
+
+
+
+
+//CURD opretion =>
 
      get: Get all books list of data from DB.
      post: Insert new Book records into Database.
@@ -6,10 +13,10 @@
     delete: delete book record by using book id.
 
 
-endpoint :
+ // endpoint =>
 
     1. /books  : this endpoint is use to Insert record.
-    2. /bookFind : this endpoint is user to find allrecord.
-    3. /bookFind/:id :  record find by id 
-    4. /bookDelete/:id :  record find by id and delete record
+    2. /book : this endpoint is user to find allrecord.
+    3. /books/:id :  record find by id 
+    4. /books/:id :  record find by id and delete record
     5. 
