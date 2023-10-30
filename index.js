@@ -62,14 +62,14 @@ app.get('/books', async (req, res) => {
 
 
 app.get('/books/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const book = await BOOK.findOne({ _id: id });
-        res.send(book);
-    } catch (err) {
-        console.log(err)
-        res.send(err)
-    }
+
+    const { id } = req.params;
+    await BOOK.findOne({ _id: id }).then((resp) => {
+        res.send(resp)
+    }).catch((error) => {
+        console.log(error)
+    })
+    // res.send(book);
 
 });
 
@@ -80,14 +80,22 @@ app.get('/books/:id', async (req, res) => {
 app.delete('/books/:id', async function (req, res) {
     const { id } = req.params;
     const bookExist = await BOOK.findOne({ _id: id });
+
     if (!bookExist) return res.send('Book Do Not exist');
+
     await BOOK.deleteOne({ _id: id }).then(function () {
         console.log("Data deleted"); // Success
         res.send("Book Record Deleted Successfully")
+
     }).catch(function (error) {
         console.log(error); // Failure
     });
 });
+
+
+
+
+
 
 
 
