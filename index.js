@@ -51,7 +51,7 @@ app.post('/books', async (req, res)=> {
 
 
 
-app.get('/books' ,async(req,res) =>{
+app.get('/bookFind' ,async(req,res) =>{
     const bookList = await BOOK.find();
     console.log(bookList);
     res.send(bookList);
@@ -60,7 +60,7 @@ app.get('/books' ,async(req,res) =>{
 
 
 
-app.get('/books/:id', async  (req, res) => {
+app.get('/bookFind/:id', async  (req, res) => {
     const { id } = req.params;
 
     const book = await BOOK.findOne({isbn : id});
@@ -73,7 +73,7 @@ app.get('/books/:id', async  (req, res) => {
 
 
 
-app.delete('/books/:id', async function (req, res) {
+app.delete('/bookDelete/:id', async function (req, res) {
     const { id } = req.params;
 
     const bookExist = await BOOK.findOne({isbn : id});
@@ -88,6 +88,9 @@ app.delete('/books/:id', async function (req, res) {
         console.log(error); 
     });
 });
+
+
+
 
 
 
