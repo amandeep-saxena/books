@@ -35,8 +35,6 @@ mongoose.connect(process.env.MONGODB, {
 
 //create books //
 
-
-
 app.post('/books', async (req, res) => {
     const title = req.body.title;
     const author = req.body.author;
@@ -44,7 +42,7 @@ app.post('/books', async (req, res) => {
     const bookExist = await BOOK.findOne({ title: title });
     console.log(bookExist)
 
-    // if (bookExist) return res.send('Book already exist');
+    if (bookExist) return res.send('Book already exist');
     var data = await BOOK.create({ title, author, summary });
     data.save();
     res.send("Book Uploaded");
