@@ -41,7 +41,7 @@ app.post('/books', async (req, res)=> {
     const title= req.body.title;
     const author = req.body.author;
     const summary = req.body.summary
-    const bookExist = await BOOK.findOne({titles : title});
+    const bookExist = await BOOK.findOne({title : title});
 
     if (bookExist) return res.send('Book already exist');
     var data = await BOOK.create({title,author,summary});
@@ -63,14 +63,31 @@ app.get('/books' ,async(req,res) =>{
 app.get('/books/:id', async  (req, res) => {
     const { id } = req.params;
 
-    const book = await BOOK.findOne({id : id});
+    const book = await BOOK.findOne({isbn : id});
 
-    if(!book) return res.send("Book Not Found");
+    // if(!book) return res.send("Book Not Found");
     res.send(book);
 });
 
 
 
+
+
+app.delete('/books/:id', async function (req, res) {
+    const { id } = req.params;
+
+    const bookExist = await BOOK.findOne({isbn : id});
+
+    if (!bookExist) return res.send('Book Do Not exist');
+
+   await BOOK.deleteOne({ isbn: id }).then(function(){
+        console.log("Data deleted"); 
+        res.send("Book Record Deleted Successfully")
+
+    }).catch(function(error){
+        console.log(error); 
+    });
+});
 
 
 
