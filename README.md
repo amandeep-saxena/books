@@ -27,7 +27,7 @@
 
  click on link  "https://www.freecodecamp.org/news/how-to-deploy-nodejs-application-with-render/"
 
- deploy and live link api :  https://book-7eio.onrender.com
+ deploy and live link api :  https://book-7eio.onrender.com/books
 
 
 <!-- OR -->
