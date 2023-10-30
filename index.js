@@ -90,7 +90,7 @@ app.delete('/books/:id', async function (req, res) {
 
     if (!bookExist) return res.send('Book Do Not exist');
 
-    await BOOK.deleteOne({ _id: id }).then(function () {
+    await BOOK.deleteOne({ _id: id }).then( ()=> {
         console.log("Data deleted"); // Success
         res.send("Book Record Deleted Successfully")
 
